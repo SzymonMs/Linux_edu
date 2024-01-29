@@ -1,0 +1,43 @@
+PROCES = kazdy uruchomiony w systemie Unix program
+Zbudowany z:
+-> Kod binarny zaladowany z pliku
+-> Dane programu: struktury danych zadeklarowane w programie oraz pamiec dynamicznie przydzielona do procesu w ciagu jego dzialania
+-> Dane systemowe: informacja o procesie utrzymywana przez system
+Dane systemowe:
+-> PID = identyfikator procesu - unikalna liczba calkowita
+-> PPID = identyfikator procesu macierzystego - PID procesu tworzacego dany proces
+-> Srodowisko procesu - zbior zmiennych srodowiskowych, kazdy proces ma swoje srodowisko, kopiowane od rodzica
+-> Standardowe strumienie danych
+ps : lista procesow
+ps -fe : pelna informacja o wszystkich procesach
+pstree - hierarchia procesow, na jej szczycie w Ubuntu jest systemd, init jest tu aliasem (dowiazaniem symbolicznym) do procesu systemd
+
+top -o %CPU - posortuje top ze wzgledu na zajetosc procesora
+
+Usuwanie procesu:
+kill [-nazwa_lub_numer_sygnalu] PID
+-TERM - Zatrzymanie procesu = CTRL + C
+-KILL - Zabicie procesu
+TERM = 15
+KILL = 9
+killall nazwa - Zabicie wszystkich procesow o podanej nazwie
+kill -l - lista sygnalow dla kill
+
+Proces pierwszoplanowy = uruchomiony z klawiatury terminala, powloka czeka na jego koniec
+Uruchamianie polecenia w tle = polecenie &
+Zatrzymanie procesu = CTRL+Z, zatrzymany w tle, ale nie zajmuje procesora
+bg - uruchomienie procesu w tle co byl zatrzymany
+fg - przywrocenie na pierwszy plan
+jobs - lista aktualnie kontrolowanych zadan
+
+Kazdy proces po swoim zakonczeniu przekazuje informacje o tym jak zakonczylo sie dzialanie
+0 - poprawne zakonczenie procesu
+echo $? - status ostatnio wykonywanego polecenia
+
+polecenie1 && polecenie2 - uruchom drugie polecenie tylko gdy pierwsze zakonczylo sie sukcesem
+polecenie1 || polecenie2 - uruchom drugie tylko jak pierwsze zakonczy sie niepowodzeniem
+
+
+SSH:
+ssh user@host
+scp source destination

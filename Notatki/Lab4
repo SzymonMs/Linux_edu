@@ -1,0 +1,76 @@
+ZAD.4.
+#!/bin/bash
+for FILE in *
+do
+        if [ ! -f $FILE ]
+        then
+                echo "$FILE jest katalogiem"
+        else
+                echo "$FILE jest plikiem"
+        fi
+done
+
+ZAD.5.                          
+#!/bin/bash
+
+for FILES in $*
+do
+        echo "nazwa pliku $FILES"
+        cat $FILES | sort
+done
+
+ZAD.6.                              
+#!/bin/bash
+FILE=$1
+shift
+for KAT in $*
+do
+        cp $FILE $KAT
+done
+
+ZAD.7.
+#!/bin/bash
+mkdir backup |  echo "Ten katalog już istnieje"
+for FILES in $*
+do
+        cp $FILES backup
+        cd backup
+        mv $FILES ${FILES}"`date '+%Y-%m-%d'`"
+        cd ..
+done
+
+ZAD.8.                           
+#!/bin/bash
+while true
+do
+        for FILES in *
+        do
+                if [ $FILES =  $1 ]
+                then
+                        cat $1
+                        exit
+                fi
+        done
+        sleep 5
+done
+
+ZAD.9.
+#!/bin/bash
+function suma(){
+        sum=$(($1 + $2))
+        echo "$sum"
+
+}
+suma $1 $2
+
+
+
+
+
+
+
+
+
+
+
+

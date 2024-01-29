@@ -1,0 +1,116 @@
+Kazdy proces domyslnie kozysta ze standardowych strumieni danych, ktore sa abstrakcyjnymi zrodlami/ ujsciami danych.
+Dla kazdego procesu system tworzy standardowy strumien wejsciowy, wyjsciowy oraz diagnostyczny (standard input, output, error).
+
+Standard Input = stdin = 0
+Standard Output = stdout = 1 
+Standard Error = stderr = 2
+
+Raz przeczytanych danych nie mozna ponownie przeczytac
+
+Kierowanie strumieniem przy pomocy programu cat:
+
+Operator >
+
+cat > plik.txt
+Zapisuje to co wpisze do tego pliku, jak go nie ma to utworzy
+Jezeli plik juz istnieje to usunie go i utworzy na nowo
+Nastepna linia odpowiada za wychodzenie z polecenia
+^D
+
+Operator <
+
+cat < plik.txt
+Odczytuje tresc pliku do terminala
+
+Znaki <> mozna laczyc
+cat <plik.txt > test.txt
+
+Operator >>
+cat >> plik.txt
+Dopisuje tekst do pliku, nie usuwa zawartosci jak >
+^D
+
+Operator <<
+cat << przerwa
+Proces przyjmuje nowe dane az nie napotka slowa stopujacego jego dzialanie
+A
+V
+C
+przerwa
+
+
+cat plik1.txt plik2.txt 2> plik3.err - wyswietli informacje z plikow i wyslanie strumienia error do plik3
+
+plik /dev/null to plik gdzie mozna wyslac wszystko co chcemy tracic
+
+Zapis 2>&1 spowoduje ze to co z diagnostycznego trafi na wyjsciowy
+
+
+PRZETWARZANIE POTOKOWE:
+-> Laczenie polecen znakiem |
+who | sort
+
+FILTRY:
+
+cat
+-s -> z paru pustych linii robi jedna
+-n -> numeruje wszystkie linie
+-b -> numeruje niepuste linie
+-A -> pokazuje znaki specjalne
+
+head - wyswietla pocztkowa czesc pliku/danych, standardowo 10 pierwszych linii
+-c -> liczba wyswietlanych znakow
+-n -> liczba wyswietlanych linii
+
+tail - wyswietlanie ostatnich linii pliku, standardowo 10
+-c -> liczba wyswietlanych znakow
+-n -> liczba wyswietlanych linii
+-f -> dane po zapisaniu ich do pliku sa wyswietlane na std output
+
+sort - sortowanie danych, domyslnie leksykograficznie, sortowanie odbywa sie liniami
+-n pozwala sortowac numerycznie
+-b ignoruje przy sorotowaniu spacje na poczatku linii
+-t pozwala zmienic domyslny separator kolumn (domyslnie spacje/ tab)
+-f ignorowanie wielkosci liter
+-r odwraca kolejnosc sortowania
++liczba liczba okresla liczbe kolumn pominietych przy sortowaniu
+-o nazwa_pliku zapis do pliku
+
+uniq - usuwanie powtarzajacych sie sasiadujacych linii
+-d wyswietla tylko linie powtarzajace sie
+-u wyswietla z danych wejsciowych tylko linie uniknalne
+-c zlicza liczbe powtorzen
+
+wc - zlicza znaki slowa i linie w podanych danych
+-l pozwala zliczac tylko linie
+-w pozwala zliczac tylko slowa
+-c pozwala zliczac tylko znaki
+
+tr - pozwala zamienic lancuchy tekstowe, ktore sa podawane jako argumenty wejsciowe.
+-d usuwa podane po przelaczniku znaki
+-s usuwa powtarzajace sie sasiednie znaki
+
+cut - pozwala wyswietlic fragmenty wierszy danych wejsciowych.
+-c pozwala okreslic pozycje znakowe wycinanych fragmentow wierszy
+-f pozwala okresclic numery wycinanych kolumn
+-d pozwala zmienic domyslny separator kolumn (tabulator)
+
+grep [opcje] wyrazenie [lista_plikow] - wypisuje linie zawierajace dane wyrazenie regularne
+-v wyszukuje linie bez wzorca
+-c podaje liczbe odszukaych wyrazen
+-i ignoruje wielkosc liter
+-h pomija nazwy plikow przy wypisywaniu plikow
+-r pozwala na przeszukiwanie rekurencyjne np grep wzorzec -r katalog
+-l pokazuje nazwy pliki z wzorcem
+-L nazwy plikow bez wzorca
+
+WYRAZENIA REGULARNE:
+. - dowolny znak
+[abc] - Jeden ze znakow a,b,c
+[a-z] - Jeden znak z zakresu
+[^a-z] - znaki spoza zakresu
+* - powtorzenie dowolnego symbolu poprzedzajacego dowolna ilosc razy
+^ - poczatek linii
+$ - koniec linii
+
+grep -E = egrep -> poszerzenie do normalnych wyrazen regularnych

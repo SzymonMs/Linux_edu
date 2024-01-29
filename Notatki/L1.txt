@@ -1,0 +1,66 @@
+Stosujac !! wykonujemy ostatnie wywolane polecenie, wiec zamiast je 
+pisac ponownie mozna np uzyc sudo !!
+
+who - kto jest zalogowany do systemu
+id - identyfikator
+
+Struktura katalogow:
+/bin - programy niezbedne do uruchomienia systemu
+/dev - pliki specjalne, dla dostepnych urzadzen
+/etc - lokalne pliki konfiguracyjne systemu
+/home - podkatalogi domowe uzytkownikow
+/proc - wirtualny system plikow, informacje o biezacych procesach w systemie i jego jadrze
+/root - katalog domowy uzytkownika admina
+/usr - oprogramowanie uzytkowe dla uzytkownikow
+/var - pliki czesto zmieniajace sie
+
+man 7 hier -> pomoc o strukturze katalogow
+
+touch a.txt- tworzenie pliku
+mv abc.txt cde.txt - zmiana nazwy
+mv abc.txt /etc - przeniesienie pliku do /etc
+
+Wzorce uogolniajace w nazwach plikow:
+* zastepuje dowolny ciag znakow, takze pusty
+? zastepuje dokladnie jeden dowolny znak
+[<znaki>] zastepuje dokladnie jeden znak z podanego zakresu np [xyz]
+[^<znaki>] dopelnienie, czyli kazdy znak spoza zakresu
+
+cp ./*.txt ~ kopiowanie wszystkich plikow z biezacego katalogu o rozszerzeniu txt do katalogu domowego
+rm ~/[0-9]* usuwanie wszystkich plikow z katalogu home, ktorych nazwa zaczyna sie litera
+
+mkdir -p ./kat1/kat2/kat3/kat4 - tworzenie struktury katalogow
+cp -r kat1 kat1b - tworzenie kopii katalogu z jego zawartoscia
+
+whereis ls - sciezka do programu ls
+find katalog kryteria - wyszukiwanie
+
+Lista kryteriow do wyszukiwania poleceniem find:
+name - pozycje o podanej nazwie
+iname - to co name, ale wielkosc liter nie ma znaczenia
+size <rozmiar><jednostka> - jednostki: c-bajty, k-kB, w - DWord, + - wieksze niz, - mniejsze niz
+atime <dni> - pozycje, na ktorych wykonywano jakas operacje podana liczbe dni temu
+mtime <dni> - pliki ktore modyfikowano podana liczbe dni temu
+type <typ> - f - pliki zwykle, d - katalogi
+exec <polecenie> [{}] \; - wykonuje polecenie, argumenty dla polecenia w {}
+
+find /usr -name mozilla - wszystkie pliki, ktore w nazwie maja mozilla i sa w usr
+find /usr -type d -name bin - wszystkie katalogi bin z usr
+find /usr/bin -type f -size +10c -size -100c -exec  cp {}  /home/szymonm/Desktop/kat1 \; - Skopiuj wszystkie pliki zwykłe o rozmiarze pomiędzy 10 a 100 bajtów z katalogu /usr/bin do katalogu kat1/kat2 (wykorzystaj polecenie find z parametrem -exec).
+
+
+Domyslnym wlascielem pliku/ katalogu jest uzytkownik ktory go stworzyl
+prawo odczytu = 4
+prawo zapisu = 2 
+prawo wykonywania = 1
+UZYTKOWNIK u | GRUPA g | INNI UZYTKOWNICY o | WSZYSCY = a
+
+Polecenia dla admina:
+chown [przelaczniki] nazwa_nowego_wlasciciela nazwa_pliku/kat - zmiana wlasciciela pliku
+chgrp [przelaczniki] nazwa_nowej_grupy nazwa_pliku/kat - zmiana grupy
+
+Dowiazania - analogia skrotow z MS Windows, dostep do danego pliku z poziomu roznych katalogow, pod inna nazwa
+
+ln [przelaczniki] zrodlo nazwa_dowiazania - tworzenie dowiazania
+-s dowiazania symboliczne (moze dotyczyc tez katalogu)
+
